@@ -1,29 +1,40 @@
-import Link from 'next/link'
-
-const links = [
-  { href: 'https://github.com/vercel/next.js', label: 'GitHub' },
-  { href: 'https://nextjs.org/docs', label: 'Docs' },
-]
+import { signin, signout, useSession } from 'next-auth/client'
 
 export default function Nav() {
+  const [session, loading] = useSession()
+
   return (
     <nav>
-      <ul className="flex justify-between items-center p-8">
-        <li>
-          <Link href="/">
-            <a className="text-blue-500 no-underline">Home</a>
-          </Link>
-        </li>
-        <ul className="flex justify-between items-center space-x-4">
-          {links.map(({ href, label }) => (
-            <li key={`${href}${label}`}>
-              <a href={href} className="btn-blue no-underline">
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </ul>
+      {!session && (
+        <a
+          href={`/api/auth/signin`}
+          onClick={(e) => {
+            e.preventDefault()
+            signin()
+          }}
+        >
+          <button>Sign in</button>
+        </a>
+      )}
+      {session && (
+        <>
+          <span className="inline-block w-10 h-10 bg-contain rounded-full"
+            style={{ backgroundImage: `url(${session.user.image})` }}
+          />
+          <span>
+            Signed in as <strong>{session.user.name}</strong>
+          </span>
+          <a
+            href={`/api/auth/signout`}
+            onClick={(e) => {
+              e.preventDefault()
+              signout()
+            }}
+          >
+            <button>Sign out</button>
+          </a>
+        </>
+      )}
     </nav>
   )
 }
