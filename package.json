@@ -14,7 +14,7 @@
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "^6.7.0",
-    "tailwindcss": "^1.7.4"
+    "tailwindcss": "^2.0.0-alpha.2"
   },
   "license": "MIT"
 }
