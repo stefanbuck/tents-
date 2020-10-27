@@ -5,7 +5,6 @@ const options = {
   // @link https://next-auth.js.org/configuration/providers
   providers: [
     Providers.GitHub({
-      scope: '',
       clientId: process.env.NEXTAUTH_GITHUB_ID,
       clientSecret: process.env.NEXTAUTH_GITHUB_SECRET,
     }),
@@ -66,6 +65,7 @@ const options = {
      */
     session: async (session, user) => {
       //session.customSessionProperty = 'bar'
+      session.user = user;
       return Promise.resolve(session)
     },
 
