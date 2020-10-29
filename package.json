@@ -7,11 +7,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
+    "graphql": "^15.4.0",
+    "graphql-request": "^3.3.0",
     "mongodb": "^3.6.2",
     "next": "^10.0.0",
     "next-auth": "^3.1.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "swr": "^0.3.7"
   },
   "devDependencies": {
     "postcss-flexbugs-fixes": "4.2.1",
