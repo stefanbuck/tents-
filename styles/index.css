@@ -4,11 +4,42 @@
 
 /* Start purging... */
 @tailwind components;
+
+.markdown-body {
+  @apply text-sm text-gray-800;
+}
+.markdown-body h1 {
+  @apply pb-4 text-2xl font-semibold;
+}
+
+.markdown-body h2 {
+  @apply pb-4 text-xl font-semibold;
+}
+
+.markdown-body h3 {
+  @apply pb-4 text-lg font-semibold;
+}
+
+.markdown-body h4 {
+  @apply pb-4 text-sm font-semibold;
+}
+
+.markdown-body a {
+  @apply text-blue-600
+}
+
+.markdown-body code {
+  @apply px-1 py-0.5 font-mono text-xs subpixel-antialiased bg-gray-200 rounded;
+}
+
+.markdown-body p {
+  @apply pb-4;
+}
 /* Stop purging. */
 
 /* Write your own custom component styles here */
 .btn-blue {
-  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+  @apply px-4 py-2 font-bold text-white bg-blue-500 rounded;
 }
 
 /* Start purging... */

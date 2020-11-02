@@ -1,14 +1,7 @@
-import Nav from '../components/nav'
+import Layout from '../components/layout'
 
 export default function IndexPage() {
   return (
-    <div>
-      <Nav />
-      <div className="py-20">
-        <h1 className="text-5xl text-center text-accent-1">
-          Tentacle
-        </h1>
-      </div>
-    </div>
+    <Layout></Layout>
   )
 }
