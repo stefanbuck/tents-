@@ -79,7 +79,7 @@ function Body({data}) {
   <a href={author.url} title={author.login}><img className="inline-block w-6 rounded-full" src={author.avatarUrl} /></a>
   { format(createdAt)}
 </div>
-<div className="pt-4 overflow-scroll markdown-body" dangerouslySetInnerHTML={{__html: bodyHTML}}></div>
+<div className="pt-4 break-words markdown-body" dangerouslySetInnerHTML={{__html: bodyHTML}}></div>
 <Comments totalCount={comments.totalCount} />
 <Reactions reactions={reactionGroups} />
 </>)
