@@ -28,6 +28,21 @@
   @apply text-blue-600
 }
 
+.markdown-body table th,
+.markdown-body table td {
+  @apply px-2 py-1
+}
+
+.markdown-body table th,
+.markdown-body table tr,
+.markdown-body table td {
+  @apply border
+}
+
+.markdown-body table tbody tr {
+  @apply even:bg-gray-100
+}
+
 .markdown-body code {
   @apply px-1 py-0.5 font-mono text-xs subpixel-antialiased bg-gray-200 rounded;
 }
