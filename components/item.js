@@ -46,7 +46,7 @@ function Comments({totalCount}) {
 function DiffStat({additions, deletions}) {
   return <div className="grid grid-flow-col">
     <span className="px-1.5 text-sm leading-6 text-white bg-green-500 rounded-l">+{additions}</span>
-    <span className="px-1.5 text-sm leading-6 text-white bg-red-500 rounded-r">-{additions}</span>
+    <span className="px-1.5 text-sm leading-6 text-white bg-red-500 rounded-r">-{deletions}</span>
   </div>;
 }
 
