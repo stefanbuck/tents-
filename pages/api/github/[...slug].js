@@ -1,41 +1,80 @@
 import { GraphQLClient, gql } from 'graphql-request'
 
+function queryPullRequest() {
+  return `pullRequests (last: 20) {
+    edges {
+      cursor
+      node {
+        __typename
+        additions
+        authorAssociation
+        bodyHTML
+        createdAt
+        deletions
+        merged
+        mergedAt
+        number
+        state
+        title
+        url
+        comments {
+          totalCount
+        }
+        reactionGroups {
+          content
+          users {
+            totalCount
+          }
+        }
+        author {
+          login
+          avatarUrl
+          url
+          __typename
+        }
+      }
+    }
+  }`
+}
+
+function queryIssues() {
+  return `issues (last: 20) {
+    edges {
+      cursor
+      node {
+        __typename
+        authorAssociation
+        bodyHTML
+        createdAt
+        number
+        state
+        title
+        url
+        comments {
+          totalCount
+        }
+        reactionGroups {
+          content
+          users {
+            totalCount
+          }
+        }
+        author {
+          login
+          avatarUrl
+          url
+          __typename
+        }
+      }
+    }
+  }`
+}
+
 function queryBuilder({owner, repo}) {
   return gql`query { 
     repository(name: "${repo}" owner:"${owner}") {
-      pullRequests (last:20 ) {
-        edges {
-          cursor
-          node {
-            additions
-            authorAssociation
-            bodyHTML
-            createdAt
-            deletions
-            merged
-            mergedAt
-            number
-            state
-            title
-            url
-            comments {
-              totalCount
-            }
-            reactionGroups {
-              content
-              users {
-                totalCount
-              }
-            }
-            author {
-              login
-              avatarUrl
-              url
-              __typename
-            }
-          }
-        }
-      }
+      ${queryPullRequest()}
+      ${queryIssues()}
     }
   }`
 }
@@ -50,7 +89,7 @@ async function loadFixture({owner, repo, res}) {
 export default async function handler(req, res) {
   const [owner, repo] = req.query.slug;
 
-  return loadFixture({owner, repo, res});
+  // return loadFixture({owner, repo, res});
 
   const endpoint = 'https://api.github.com/graphql'
   const graphQLClient = new GraphQLClient(endpoint, {

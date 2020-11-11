@@ -59,6 +59,11 @@ function BadgeState({type}) {
   })}>{type}</div>)
 }
 
+function BadgeType({type}) {
+  type = type.toLowerCase();
+  return (<div className='rounded capitalize inline-block px-1.5 py-0.5 text-sm text-white bg-gray-600'>{type}</div>)
+}
+
 function BadgeAuthorAssociation({type}) {
   type = type.toLowerCase();
 
@@ -70,12 +75,13 @@ function BadgeAuthorAssociation({type}) {
 }
 
 function Body({data}) {
-  const {title, comments, additions, deletions, reactionGroups, authorAssociation, number, createdAt, bodyHTML, url, author, state} = data;
+  const {__typename, title, comments, additions, deletions, reactionGroups, authorAssociation, number, createdAt, bodyHTML, url, author, state} = data;
   return (<>
   <div className="grid grid-flow-col gap-1 auto-cols-max">
+  <BadgeType type={__typename} />
   <BadgeState type={state} />
   <BadgeAuthorAssociation type={authorAssociation} />
-  <DiffStat additions={additions} deletions={deletions} />
+  {__typename === 'PullRequest' && <DiffStat additions={additions} deletions={deletions} />}
   <a href={author.url} title={author.login}><img className="inline-block w-6 rounded-full" src={author.avatarUrl} /></a>
   { format(createdAt)}
 </div>

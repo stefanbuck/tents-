@@ -19,7 +19,12 @@ export default function List({filter}) {
   if (error) return 'error'
   if (!data) return 'loading...'
 
-  const list = data.repository.pullRequests.edges.filter(item => {
+  const combinedList = [
+    ...data.repository.pullRequests.edges,
+    ...data.repository.issues.edges
+  ]
+
+  const list = combinedList.filter(item => {
     const isFilter = filterList.filter(item => item.startsWith('is:')).map(item => item.replace('is:', '').toUpperCase())
 
     if (!isFilter.length) {
