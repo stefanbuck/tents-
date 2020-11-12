@@ -89,7 +89,7 @@ async function loadFixture({owner, repo, res}) {
 export default async function handler(req, res) {
   const [owner, repo] = req.query.slug;
 
-  // return loadFixture({owner, repo, res});
+  return loadFixture({owner, repo, res});
 
   const endpoint = 'https://api.github.com/graphql'
   const graphQLClient = new GraphQLClient(endpoint, {
