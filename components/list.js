@@ -22,7 +22,7 @@ export default function List({filter}) {
   const combinedList = [
     ...data.repository.pullRequests.edges,
     ...data.repository.issues.edges
-  ]
+  ].sort((a,b) => b.node.number - a.node.number)
 
   const list = combinedList.filter(item => {
     const isFilter = filterList.filter(item => item.startsWith('is:')).map(item => item.replace('is:', '').toUpperCase())
