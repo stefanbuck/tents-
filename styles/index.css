@@ -1,13 +1,14 @@
+/* purgecss start ignore */
 @tailwind base;
+/* purgecss end ignore */
 
-/* Write your own custom base styles here */
-
-/* Start purging... */
 @tailwind components;
+@tailwind utilities;
 
 .markdown-body {
   @apply text-sm text-gray-800;
 }
+
 .markdown-body h1 {
   @apply pb-4 text-2xl font-semibold;
 }
@@ -25,22 +26,22 @@
 }
 
 .markdown-body a {
-  @apply text-blue-600
+  @apply text-blue-600;
 }
 
 .markdown-body table th,
 .markdown-body table td {
-  @apply px-2 py-1
+  @apply px-2 py-1;
 }
 
 .markdown-body table th,
 .markdown-body table tr,
 .markdown-body table td {
-  @apply border
+  @apply border;
 }
 
 .markdown-body table tbody tr {
-  @apply even:bg-gray-100
+  @apply even:bg-gray-100;
 }
 
 .markdown-body code {
@@ -50,15 +51,3 @@
 .markdown-body p {
   @apply pb-4;
 }
-/* Stop purging. */
-
-/* Write your own custom component styles here */
-.btn-blue {
-  @apply px-4 py-2 font-bold text-white bg-blue-500 rounded;
-}
-
-/* Start purging... */
-@tailwind utilities;
-/* Stop purging. */
-
-/* Your own custom utilities */
