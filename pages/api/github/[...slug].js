@@ -1,4 +1,4 @@
-import { GraphQLClient, gql } from 'graphql-request'
+import { GraphQLClient, gql } from 'graphql-request';
 
 function queryPullRequest() {
   return `pullRequests (last: 20) {
@@ -34,7 +34,7 @@ function queryPullRequest() {
         }
       }
     }
-  }`
+  }`;
 }
 
 function queryIssues() {
@@ -67,40 +67,40 @@ function queryIssues() {
         }
       }
     }
-  }`
+  }`;
 }
 
-function queryBuilder({owner, repo}) {
+function queryBuilder({ owner, repo }) {
   return gql`query { 
     repository(name: "${repo}" owner:"${owner}") {
       ${queryPullRequest()}
       ${queryIssues()}
     }
-  }`
+  }`;
 }
 
-async function loadFixture({owner, repo, res}) {
-  const json = await import(`../fixtures/${owner}_${repo}.json`)
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
+async function loadFixture({ owner, repo, res }) {
+  const json = await import(`../fixtures/${owner}_${repo}.json`);
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify(json));
 }
 
 export default async function handler(req, res) {
   const [owner, repo] = req.query.slug;
 
-  return loadFixture({owner, repo, res});
-
-  const endpoint = 'https://api.github.com/graphql'
+  return loadFixture({ owner, repo, res });
+  // eslint-disable-next-line no-unreachable
+  const endpoint = 'https://api.github.com/graphql';
   const graphQLClient = new GraphQLClient(endpoint, {
     headers: {
       authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
     },
-  })
+  });
 
-  const data = await graphQLClient.request(queryBuilder({owner, repo}))
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'application/json')
+  const data = await graphQLClient.request(queryBuilder({ owner, repo }));
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'application/json');
   data.repository.pullRequests.edges = data.repository.pullRequests.edges.reverse();
-  res.end(JSON.stringify(data))
+  res.end(JSON.stringify(data));
 }

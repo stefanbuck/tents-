@@ -1,20 +1,30 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-const PLAUSIBLE_ENABLED = process.env.PLAUSIBLE_ENABLED || false
+const PLAUSIBLE_ENABLED = process.env.PLAUSIBLE_ENABLED || false;
 
-const plausibleSnippet = 'function() { (window.plausible.q = window.plausible.q || []).push(arguments) }';
-const plausibleFunction = PLAUSIBLE_ENABLED ? plausibleSnippet : 'function() {}'
+const plausibleSnippet =
+  'function() { (window.plausible.q = window.plausible.q || []).push(arguments) }';
+const plausibleFunction = PLAUSIBLE_ENABLED
+  ? plausibleSnippet
+  : 'function() {}';
 
 export default class NextSite extends Document {
   render() {
     return (
-      <Html lang='en'>
+      <Html lang="en">
         <Head>
-          {PLAUSIBLE_ENABLED && (<script async defer data-domain="tentacle.app" src="https://plausible.io/js/plausible.js" />)}
+          {PLAUSIBLE_ENABLED && (
+            <script
+              async
+              defer
+              data-domain="tentacle.app"
+              src="https://plausible.io/js/plausible.js"
+            />
+          )}
           <script
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
-              __html: `window.plausible = window.plausible || ${plausibleFunction}`
+              __html: `window.plausible = window.plausible || ${plausibleFunction}`,
             }}
           />
         </Head>
@@ -23,6 +33,6 @@ export default class NextSite extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

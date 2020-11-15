@@ -1,7 +1,7 @@
-import '../styles/index.css'
+import '../styles/index.css';
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />; // eslint-disable-line react/jsx-props-no-spreading
 }
 
-export default MyApp
+export default MyApp;
