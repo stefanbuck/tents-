@@ -14,7 +14,7 @@ After that, you can use the site in the browser at http://localhost:3000.
 
 ## Community
 
-- [Discord chatroom](https://discord.gg/r8FqZ2hw) – Shape and discuss the project with the community.
+- [Discord chatroom](https://discord.gg/SQcgmVwXXg) – Shape and discuss the project with the community.
 - Give us a star ⭐️ - If you are using tentacle.app or think it is an interesting project, we would love a star ❤️
 
 ## Disclaimer
