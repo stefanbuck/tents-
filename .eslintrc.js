@@ -12,6 +12,14 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.js'],
+      },
+    },
+  },
   plugins: ['react', 'prettier'],
   rules: {
     'prettier/prettier': [

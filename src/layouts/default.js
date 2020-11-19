@@ -1,4 +1,4 @@
-export default function Layout({ children }) {
+export default function DefaultLayout({ children }) {
   return (
     <div>
       <div className="px-6">
