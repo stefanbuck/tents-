@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 .markdown-body {
-  @apply text-sm text-gray-800;
+  @apply text-sm text-gray-600;
 }
 
 .markdown-body h1 {
@@ -50,4 +50,8 @@
 
 .markdown-body p {
   @apply pb-4;
+}
+
+.markdown-body p:last-child {
+  @apply pb-0;
 }

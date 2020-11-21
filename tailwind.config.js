@@ -1,3 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -6,8 +11,12 @@ module.exports = {
   purge: ['./src/**/*.{js,mdx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        mono: [...defaultTheme.fontFamily.mono],
+      },
       colors: {
-        'accent-1': '#333',
+        rose: colors.rose,
       },
     },
   },
