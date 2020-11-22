@@ -35,13 +35,15 @@ function State({ type, state }) {
   );
 }
 
-function Comments({ totalCount }) {
+function Comments({ totalCount, url }) {
   return (
     <div className="inline-block mr-2">
       <CommentsIcon />
-      <span className="pl-1 text-xs">
-        {totalCount} Comment{totalCount === 1 ? '' : 's'}
-      </span>
+      <a href={url}>
+        <span className="pl-1 text-xs">
+          {totalCount} Comment{totalCount === 1 ? '' : 's'}
+        </span>
+      </a>
     </div>
   );
 }
@@ -100,7 +102,7 @@ export default function Card(data) {
       />
       <div className="grid justify-start grid-flow-col gap-4 pt-4">
         <State type={type} state={state} />
-        <Comments totalCount={comments.totalCount} />
+        <Comments totalCount={comments.totalCount} url={url} />
       </div>
     </div>
   );
