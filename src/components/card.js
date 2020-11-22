@@ -1,19 +1,21 @@
 import cn from 'classnames';
 import { format } from 'timeago.js';
-import MergedIcon from '@/components/icons/merged';
-import ClosedIcon from '@/components/icons/closed';
+import MergedIcon from '@/components/icons/merge';
+import PullRequestIcon from '@/components/icons/pullrequest';
+import IssueOpenedIcon from '@/components/icons/issue-closed';
+import IssueClosedIcon from '@/components/icons/issue-opened';
 import CommentsIcon from '@/components/icons/comments';
 
 function State({ type, state }) {
   const iconConfig = {
     PullRequest: {
-      OPEN: MergedIcon,
-      CLOSED: ClosedIcon,
+      OPEN: PullRequestIcon,
+      CLOSED: PullRequestIcon,
       MERGED: MergedIcon,
     },
     Issue: {
-      OPEN: MergedIcon,
-      CLOSED: ClosedIcon,
+      OPEN: IssueOpenedIcon,
+      CLOSED: IssueClosedIcon,
     },
   };
 
@@ -22,7 +24,7 @@ function State({ type, state }) {
   return (
     <div
       className={cn(
-        'rounded capitalize inline-block px-2 py-1 text-sm text-white',
+        'rounded flex items-center capitalize inline-block px-3 py-1 text-sm text-white',
         {
           'bg-green-700': state === 'OPEN',
           'bg-rose-800': state === 'CLOSED',
@@ -30,7 +32,8 @@ function State({ type, state }) {
         }
       )}
     >
-      <Icon /> {state.toLowerCase()}
+      <Icon />
+      <span className="pl-2">{state.toLowerCase()}</span>
     </div>
   );
 }
