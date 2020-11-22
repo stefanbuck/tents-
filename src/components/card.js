@@ -62,6 +62,7 @@ export default function Card(data) {
     __typename: type,
     additions,
     author,
+    authorAssociation,
     bodyHTML,
     comments,
     createdAt,
@@ -85,13 +86,18 @@ export default function Card(data) {
           />
         </a>
         <div className="flex flex-col pl-2">
-          <a
-            className="block mb-1 text-sm font-bold leading-none gray-700"
-            href={author.url}
-            title={author.login}
-          >
-            {author.login}
-          </a>
+          <div className="flex grid content-center justify-start grid-flow-col gap-1 mb-2">
+            <a
+              className="block text-sm font-bold leading-none gray-700"
+              href={author.url}
+              title={author.login}
+            >
+              {author.login}
+            </a>
+            <div className="-my-0.5 py-0.5 px-1 text-xs leading-none text-gray-700 bg-gray-100 border border-gray-200 rounded-sm">
+              {authorAssociation}
+            </div>
+          </div>
           <div className="text-xs font-normal leading-none">
             <span className="text-xs font-normal leading-none text-gray-400">
               {format(createdAt)}
