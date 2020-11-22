@@ -45,7 +45,11 @@
 }
 
 .markdown-body code {
-  @apply px-1 py-0.5 font-mono text-xs subpixel-antialiased bg-gray-200 rounded;
+  @apply px-1 py-0.5 font-mono text-xs subpixel-antialiased bg-gray-100 rounded;
+}
+
+.markdown-body pre {
+  @apply p-4 overflow-scroll font-mono text-xs subpixel-antialiased bg-gray-100 rounded;
 }
 
 .markdown-body p {
