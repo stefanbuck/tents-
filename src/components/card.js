@@ -64,7 +64,11 @@ export default function Card(data) {
   return (
     <div className="p-6 mb-4 bg-white">
       <div className="flex items-center">
-        <a className="relative flex-0" href={author.url} title={author.login}>
+        <a
+          className="relative flex-shrink-0 flex-0"
+          href={author.url}
+          title={author.login}
+        >
           <img
             className="w-10 p-0.5 border-2 border-purple-600 rounded-full"
             alt={author.login}
