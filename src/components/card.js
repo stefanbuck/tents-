@@ -48,6 +48,15 @@ function Comments({ totalCount, url }) {
   );
 }
 
+function DiffStats({ additions, deletions }) {
+  return (
+    <>
+      <span className="pl-1 leading-none text-green-700">+{additions}</span>
+      <span className="pl-1 leading-none text-rose-800">-{deletions}</span>
+    </>
+  );
+}
+
 export default function Card(data) {
   const {
     __typename: type,
@@ -87,12 +96,9 @@ export default function Card(data) {
             <span className="text-xs font-normal leading-none text-gray-400">
               {format(createdAt)}
             </span>
-            <span className="pl-1 leading-none text-green-700">
-              +{additions}
-            </span>
-            <span className="pl-1 leading-none text-rose-800">
-              -{deletions}
-            </span>
+            {type === 'PullRequest' && (
+              <DiffStats additions={additions} deletions={deletions} />
+            )}
           </div>
         </div>
       </div>
