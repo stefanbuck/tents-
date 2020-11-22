@@ -72,9 +72,13 @@ export default function Card(data) {
           />
         </a>
         <div className="pl-2 flex-">
-          <div className="mb-1 text-sm font-bold leading-none gray-700">
+          <a
+            className="mb-1 text-sm font-bold leading-none gray-700"
+            href={author.url}
+            title={author.login}
+          >
             {author.login}
-          </div>
+          </a>
           <div className="text-xs font-normal leading-none">
             <span className="text-xs font-normal leading-none text-gray-400">
               {format(createdAt)}
