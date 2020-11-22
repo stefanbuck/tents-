@@ -84,9 +84,9 @@ export default function Card(data) {
             src={author.avatarUrl}
           />
         </a>
-        <div className="pl-2 flex-">
+        <div className="flex flex-col pl-2">
           <a
-            className="mb-1 text-sm font-bold leading-none gray-700"
+            className="block mb-1 text-sm font-bold leading-none gray-700"
             href={author.url}
             title={author.login}
           >
