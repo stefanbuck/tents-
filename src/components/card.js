@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import Image from 'next/image';
 import { format } from 'timeago.js';
 import MergedIcon from '@/components/icons/merge';
 import PullRequestIcon from '@/components/icons/pullrequest';
@@ -82,7 +83,9 @@ export default function Card(data) {
           href={author.url}
           title={author.login}
         >
-          <img
+          <Image
+            width="40"
+            height="40"
             className="w-10 p-0.5 border-2 border-purple-600 rounded-full"
             alt={author.login}
             src={author.avatarUrl}
