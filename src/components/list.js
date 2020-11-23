@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import Item from './item';
+import Card from './card';
 
 const SLUG_REGEXP = /^[a-z0-9-]+\/[a-z0-9-]+$/;
 
@@ -46,7 +46,7 @@ export default function List({ filter }) {
     <>
       Result: {list.length}
       {list.map(({ cursor, node }) => (
-        <Item
+        <Card
           key={cursor}
           {...node} /* eslint-disable-line react/jsx-props-no-spreading */
         />
