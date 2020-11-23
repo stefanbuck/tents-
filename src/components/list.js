@@ -2,9 +2,33 @@ import useSWR from 'swr';
 import Card from './card';
 
 const SLUG_REGEXP = /^[a-z0-9-]+\/[a-z0-9-]+$/;
+const validSlugs = [
+  'backstage/backstage',
+  'facebook/jest',
+  'facebook/react',
+  'tdeekens/flopflip',
+  'vercel/next.js',
+];
 
 function isValidSlug(slug) {
-  return SLUG_REGEXP.test(slug);
+  return SLUG_REGEXP.test(slug) && validSlugs.includes(slug);
+}
+
+function InvalidSlug() {
+  return (
+    <div>
+      The Tentacle.app project is in early development stage! Therefore the{' '}
+      <span className="px-1 py-0.5 font-mono text-ms text-blue-700 border border-blue-300 bg-blue-100 subpixel-antialiased bg-gray-100 rounded">
+        repo
+      </span>{' '}
+      filter is limited to:
+      <ul className="list-disc list-inside">
+        {validSlugs.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
 export default function List({ filter }) {
@@ -20,6 +44,10 @@ export default function List({ filter }) {
       shouldRetryOnError: false,
     }
   );
+
+  if (!validSlugs.includes(slug)) {
+    return <InvalidSlug />;
+  }
 
   if (!isValidSlug(slug)) return null;
   if (error) return 'error';
