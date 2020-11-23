@@ -72,7 +72,6 @@ export default function List({ filter }) {
 
   return (
     <>
-      Result: {list.length}
       {list.map(({ cursor, node }) => (
         <Card
           key={cursor}
