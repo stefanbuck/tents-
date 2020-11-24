@@ -83,9 +83,12 @@ export default function Card(data) {
           title={author.login}
         >
           <img
-            className="w-10 p-0.5 border-2 border-purple-600 rounded-full"
-            alt={author.login}
-            src={author.avatarUrl}
+            width="40"
+            height="40"
+            className="w-10 h-10 p-0.5 border-2 border-purple-600 rounded-full"
+            loading="lazy"
+            alt=""
+            src={`${author.avatarUrl}&s=80`}
           />
         </a>
         <div className="flex flex-col pl-2">
