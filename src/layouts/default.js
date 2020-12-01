@@ -7,7 +7,7 @@ export default function DefaultLayout({ children }) {
         <Logo />
       </header>
 
-      <div className="px-6 bg-gray-100">{children}</div>
+      <div className="px-6">{children}</div>
     </div>
   );
 }

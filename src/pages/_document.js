@@ -28,7 +28,7 @@ export default class NextSite extends Document {
             }}
           />
         </Head>
-        <body>
+        <body className="bg-blue-gray-50">
           <Main />
           <NextScript />
         </body>

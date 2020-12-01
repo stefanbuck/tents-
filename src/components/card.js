@@ -75,7 +75,7 @@ export default function Card(data) {
     url,
   } = data;
   return (
-    <div className="p-6 mb-4 bg-white">
+    <div className="p-6 mb-4 bg-white border rounded border-blue-gray-200">
       <div className="flex items-center">
         <a
           className="relative flex-shrink-0 flex-0"

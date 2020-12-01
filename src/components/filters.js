@@ -8,11 +8,11 @@ export default function Filters({ setValue, value }) {
   }
 
   return (
-    <div className="flex justify-between p-2 my-8 bg-gray-200 rounded">
+    <div className="flex justify-between p-2 my-6 rounded bg-blue-gray-200">
       Filters
       <input
         onChange={inputHandler}
-        className="w-full px-1 ml-2"
+        className="w-full px-1 ml-2 bg-white"
         defaultValue={value}
       />
     </div>
