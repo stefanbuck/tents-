@@ -85,7 +85,7 @@ export default function Card(data) {
           <img
             width="40"
             height="40"
-            className="w-10 h-10 p-0.5 border-2 border-purple-600 rounded-full"
+            className="w-10 h-10 p-0.5 border-2 border-blue-gray-400 rounded-full"
             loading="lazy"
             alt=""
             src={`${author.avatarUrl}&s=80`}
