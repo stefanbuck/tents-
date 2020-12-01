@@ -1,12 +1,13 @@
+import Logo from '@/components/tentacle-logo';
+
 export default function DefaultLayout({ children }) {
   return (
     <div>
-      <div className="px-6 bg-gray-100">
-        <h1 className="mt-3 mb-6 text-5xl text-center text-accent-1">
-          Tentacle.app
-        </h1>
-        {children}
-      </div>
+      <header className="px-6 py-4 bg-blue-gray-900">
+        <Logo />
+      </header>
+
+      <div className="px-6 bg-gray-100">{children}</div>
     </div>
   );
 }
