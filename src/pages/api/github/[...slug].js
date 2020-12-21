@@ -98,7 +98,12 @@ export default async function handler(req, res) {
     },
   });
 
-  const data = await graphQLClient.request(queryBuilder({ owner, repo }));
+  const { data, headers } = await graphQLClient.rawRequest(
+    queryBuilder({ owner, repo })
+  );
+  // eslint-disable-next-line no-console
+  console.log('Rate limit remaining', headers.get('x-ratelimit-remaining'));
+
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
   data.repository.pullRequests.edges = data.repository.pullRequests.edges.reverse();
