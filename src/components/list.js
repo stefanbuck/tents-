@@ -41,6 +41,7 @@ export default function List({ filter }) {
     isValidSlug(slug) ? `/api/github/${slug}` : null,
     undefined,
     {
+      revalidateOnFocus: false,
       shouldRetryOnError: false,
     }
   );
