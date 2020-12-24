@@ -1,4 +1,18 @@
 import { GraphQLClient, gql } from 'graphql-request';
+import { getSession } from 'next-auth/client';
+import { MongoClient, ObjectId } from 'mongodb';
+
+let cachedDb = null;
+
+async function connectToDatabase(uri) {
+  if (cachedDb) {
+    return cachedDb;
+  }
+
+  const db = await MongoClient.connect(uri, { useNewUrlParser: true });
+  cachedDb = db;
+  return cachedDb;
+}
 
 function queryPullRequest() {
   return `pullRequests (last: 20) {
@@ -88,13 +102,24 @@ async function loadFixture({ owner, repo, res }) {
 
 export default async function handler(req, res) {
   const [owner, repo] = req.query.slug;
+  const session = await getSession({ req });
 
-  return loadFixture({ owner, repo, res });
-  // eslint-disable-next-line no-unreachable
+  if (!session) {
+    return loadFixture({ owner, repo, res });
+  }
+
+  const client = await connectToDatabase(process.env.NEXTAUTH_DATABASE_URL);
+  const db = client.db(client.s.options.dbName);
+  const collection = db.collection('accounts');
+
+  const { accessToken } = await collection.findOne({
+    userId: ObjectId(session.userId),
+  });
+
   const endpoint = 'https://api.github.com/graphql';
   const graphQLClient = new GraphQLClient(endpoint, {
     headers: {
-      authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+      authorization: `Bearer ${accessToken}`,
     },
   });
 
@@ -107,5 +132,5 @@ export default async function handler(req, res) {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
   data.repository.pullRequests.edges = data.repository.pullRequests.edges.reverse();
-  res.end(JSON.stringify(data));
+  return res.end(JSON.stringify(data));
 }

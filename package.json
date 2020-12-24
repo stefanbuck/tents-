@@ -37,6 +37,9 @@
     "prettier": "^2.1.2",
     "tailwindcss": "^2.0.1"
   },
+  "peerOptionalDependencies": {
+    "mongodb": "^3.6.3"
+  },
   "resolutions": {
     "typeorm": "0.2.28"
   },

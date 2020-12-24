@@ -64,9 +64,8 @@ const options = {
      *                               JSON Web Token (if not using database sessions)
      * @return {object}              Session that will be returned to the client
      */
-    session: async (session) => {
-      // session.customSessionProperty = 'bar'
-      return Promise.resolve(session);
+    session: async (session, user) => {
+      return Promise.resolve({ ...session, userId: user.id });
     },
 
     /**

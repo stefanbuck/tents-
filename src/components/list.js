@@ -1,7 +1,8 @@
 import useSWR from 'swr';
+import { useSession } from 'next-auth/client';
 import Card from './card';
 
-const SLUG_REGEXP = /^[a-z0-9-]+\/[a-z0-9-]+$/;
+const SLUG_REGEXP = /^[a-z0-9-]+\/[a-z0-9-]+$/i;
 const validSlugs = [
   'backstage/backstage',
   'facebook/jest',
@@ -11,13 +12,13 @@ const validSlugs = [
 ];
 
 function isValidSlug(slug) {
-  return SLUG_REGEXP.test(slug) && validSlugs.includes(slug);
+  return SLUG_REGEXP.test(slug);
 }
 
 function InvalidSlug() {
   return (
     <div>
-      The Tentacle.app project is in early development stage! Therefore the{' '}
+      For unauthenticated users the{' '}
       <span className="px-1 py-0.5 font-mono text-ms text-blue-700 border border-blue-300 bg-blue-100 subpixel-antialiased bg-gray-100 rounded">
         repo
       </span>{' '}
@@ -32,6 +33,7 @@ function InvalidSlug() {
 }
 
 export default function List({ filter }) {
+  const [session] = useSession();
   const filterList = filter.split(' ');
   const slug = filterList
     .filter((item) => item.startsWith('repo:'))
@@ -46,7 +48,7 @@ export default function List({ filter }) {
     }
   );
 
-  if (!validSlugs.includes(slug)) {
+  if (!session && !validSlugs.includes(slug)) {
     return <InvalidSlug />;
   }
 
