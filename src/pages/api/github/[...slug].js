@@ -97,6 +97,7 @@ async function loadFixture({ owner, repo, res }) {
   const json = await import(`../fixtures/${owner}_${repo}.json`);
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
   res.send(JSON.stringify(json));
 }
 
@@ -126,11 +127,18 @@ export default async function handler(req, res) {
   const { data, headers } = await graphQLClient.rawRequest(
     queryBuilder({ owner, repo })
   );
-  // eslint-disable-next-line no-console
-  console.log('Rate limit remaining', headers.get('x-ratelimit-remaining'));
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
+  res.setHeader('x-ratelimit-limit', headers.get('x-ratelimit-limit'));
+  res.setHeader('x-ratelimit-remaining', headers.get('x-ratelimit-remaining'));
+  res.setHeader('x-ratelimit-reset', headers.get('x-ratelimit-reset'));
+  res.setHeader('x-ratelimit-used', headers.get('x-ratelimit-used'));
+  res.setHeader(
+    'Cache-Control',
+    'public, max-age=300, s-maxage=300, stale-while-revalidate'
+  );
+
   data.repository.pullRequests.edges = data.repository.pullRequests.edges.reverse();
   return res.end(JSON.stringify(data));
 }
