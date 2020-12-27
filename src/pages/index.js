@@ -6,7 +6,7 @@ import Filters from '@/components/filters';
 import Hero from '@/components/hero';
 
 export default function IndexPage() {
-  const [filter, setFilter] = useState('is:merged repo:backstage/backstage');
+  const [filter, setFilter] = useState('is:merged repo:facebook/react');
   const [session, loading] = useSession();
 
   if (loading) return null;
