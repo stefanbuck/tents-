@@ -8,6 +8,9 @@
       "@/layouts/*": [
         "src/layouts/*"
       ],
+      "@/helpers/*": [
+        "src/helpers/*"
+      ],
       "@/css/*": [
         "src/css/*"
       ],

@@ -1,6 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request';
 import { getSession } from 'next-auth/client';
 import { MongoClient, ObjectId } from 'mongodb';
+import { authenticationRequiredHandler } from '@/helpers/api/response';
 
 let cachedDb = null;
 
@@ -93,20 +94,12 @@ function queryBuilder({ owner, repo }) {
   }`;
 }
 
-async function loadFixture({ owner, repo, res }) {
-  const json = await import(`../fixtures/${owner}_${repo}.json`);
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'application/json');
-  res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
-  res.send(JSON.stringify(json));
-}
-
 export default async function handler(req, res) {
   const [owner, repo] = req.query.slug;
   const session = await getSession({ req });
 
   if (!session) {
-    return loadFixture({ owner, repo, res });
+    return authenticationRequiredHandler(res);
   }
 
   const client = await connectToDatabase(process.env.NEXTAUTH_DATABASE_URL);

@@ -39,14 +39,12 @@ export default function List({ filter }) {
     .filter((item) => item.startsWith('repo:'))
     .map((item) => item.replace('repo:', ''))[0];
 
-  const { data, error } = useSWR(
-    isValidSlug(slug) ? `/api/github/${slug}` : null,
-    undefined,
-    {
-      revalidateOnFocus: false,
-      shouldRetryOnError: false,
-    }
-  );
+  const apiUrl = session ? `/api/github/${slug}` : `/api/fixture/${slug}`;
+
+  const { data, error } = useSWR(isValidSlug(slug) ? apiUrl : null, undefined, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: false,
+  });
 
   if (!session && !validSlugs.includes(slug)) {
     return <InvalidSlug />;
