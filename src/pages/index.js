@@ -4,6 +4,8 @@ import Layout from '@/layouts/default';
 import List from '@/components/list';
 import Filters from '@/components/filters';
 import Hero from '@/components/hero';
+import Card from '@/components/card';
+import Feedback from '@/components/feedback';
 
 export default function IndexPage() {
   const [filter, setFilter] = useState('is:merged repo:facebook/react');
@@ -15,7 +17,17 @@ export default function IndexPage() {
     <Layout>
       {!session && <Hero />}
       <Filters value={filter} setValue={setFilter} />
-      <List filter={filter} />
+      <List filter={filter}>
+        {({ cursor, node, index }) => (
+          <>
+            <Card
+              key={cursor}
+              {...node} /* eslint-disable-line react/jsx-props-no-spreading */
+            />
+            {index === 3 ? <Feedback /> : ''}
+          </>
+        )}
+      </List>
     </Layout>
   );
 }

@@ -1,6 +1,5 @@
 import useSWR from 'swr';
 import { useSession } from 'next-auth/client';
-import Card from './card';
 
 const SLUG_REGEXP = /^[a-z0-9-]+\/[a-z0-9-]+$/i;
 const validSlugs = [
@@ -32,7 +31,7 @@ function InvalidSlug() {
   );
 }
 
-export default function List({ filter }) {
+export default function List({ filter, children }) {
   const [session] = useSession();
   const filterList = filter.split(' ');
   const slug = filterList
@@ -71,14 +70,7 @@ export default function List({ filter }) {
     return isFilter.includes(item.node.state);
   });
 
-  return (
-    <>
-      {list.map(({ cursor, node }) => (
-        <Card
-          key={cursor}
-          {...node} /* eslint-disable-line react/jsx-props-no-spreading */
-        />
-      ))}
-    </>
+  return list.map(({ cursor, node }, index) =>
+    children({ cursor, node, index })
   );
 }
