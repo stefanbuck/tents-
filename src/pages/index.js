@@ -24,7 +24,7 @@ export default function IndexPage() {
               key={cursor}
               {...node} /* eslint-disable-line react/jsx-props-no-spreading */
             />
-            {index === 3 ? <Feedback /> : ''}
+            {index === 4 ? <Feedback /> : ''}
           </>
         )}
       </List>
