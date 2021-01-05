@@ -59,3 +59,11 @@
 .markdown-body p:last-child {
   @apply pb-0;
 }
+
+.markdown-body .blob-wrapper-embedded {
+  @apply overflow-y-auto max-h-14
+}
+
+.markdown-body .blob-num:before {
+  content: attr(data-line-number);
+}
