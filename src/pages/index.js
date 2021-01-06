@@ -8,7 +8,9 @@ import Card from '@/components/card';
 import Feedback from '@/components/feedback';
 
 export default function IndexPage() {
-  const [filter, setFilter] = useState('is:merged repo:facebook/react');
+  const [filter, setFilter] = useState(
+    'repo:facebook/react is:open is:pull-request'
+  );
   const [session, loading] = useSession();
 
   if (loading) return null;
@@ -19,13 +21,12 @@ export default function IndexPage() {
       <Filters value={filter} setValue={setFilter} />
       <List filter={filter}>
         {({ cursor, node, index }) => (
-          <>
+          <div key={cursor}>
             <Card
-              key={cursor}
               {...node} /* eslint-disable-line react/jsx-props-no-spreading */
             />
             {index === 4 ? <Feedback /> : ''}
-          </>
+          </div>
         )}
       </List>
     </Layout>
