@@ -67,3 +67,12 @@
 .markdown-body .blob-num:before {
   content: attr(data-line-number);
 }
+
+.filter-grayscale {
+  filter: grayscale(100%);
+}
+
+.hover\:filter-none:hover,
+.filter-none {
+  filter: none !important;
+}

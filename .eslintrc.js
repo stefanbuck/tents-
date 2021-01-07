@@ -29,6 +29,12 @@ module.exports = {
         tabWidth: 2,
       },
     ],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelAttributes: ['label'],
+      },
+    ],
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
     'react/jsx-filename-extension': 0,
