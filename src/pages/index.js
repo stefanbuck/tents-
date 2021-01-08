@@ -8,9 +8,7 @@ import Card from '@/components/card';
 import Feedback from '@/components/feedback';
 
 export default function IndexPage() {
-  const [filter, setFilter] = useState(
-    'repo:facebook/react is:open is:pull-request'
-  );
+  const [filter, setFilter] = useState('');
   const [session, loading] = useSession();
 
   if (loading) return null;
@@ -18,7 +16,7 @@ export default function IndexPage() {
   return (
     <Layout>
       {!session && <Hero />}
-      <Filters value={filter} setValue={setFilter} />
+      <Filters onChange={(value) => setFilter(value)} />
       <List filter={filter}>
         {({ cursor, node, index }) => (
           <div key={cursor}>
