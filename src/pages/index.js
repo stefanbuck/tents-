@@ -18,14 +18,19 @@ export default function IndexPage() {
       {!session && <Hero />}
       <Filters onChange={(value) => setFilter(value)} />
       <List filter={filter}>
-        {({ cursor, node, index }) => (
-          <div key={cursor}>
-            <Card
-              {...node} /* eslint-disable-line react/jsx-props-no-spreading */
-            />
-            {index === 2 ? <Feedback /> : ''}
-          </div>
-        )}
+        {function ListChildren({ cursor, node, index, total }) {
+          if (total === 0) {
+            return <div>No results matched your filter criteria.</div>;
+          }
+          return (
+            <div key={cursor}>
+              <Card
+                {...node} /* eslint-disable-line react/jsx-props-no-spreading */
+              />
+              {index === 2 ? <Feedback /> : ''}
+            </div>
+          );
+        }}
       </List>
     </Layout>
   );

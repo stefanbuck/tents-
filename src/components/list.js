@@ -26,7 +26,11 @@ export default function List({ filter, children }) {
     (a, b) => b.node.number - a.node.number
   );
 
+  if (!combinedList.length) {
+    return children({ total: 0 });
+  }
+
   return combinedList.map(({ cursor, node }, index) =>
-    children({ cursor, node, index })
+    children({ cursor, node, index, total: combinedList.length })
   );
 }
