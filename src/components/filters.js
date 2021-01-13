@@ -13,7 +13,7 @@ export default function Filters({ onChange }) {
   }
 
   const [filter, setFilter] = useState(
-    getFilterFromQuery() || 'repo:facebook/react is:open is:pull-request'
+    getFilterFromQuery() || 'repo:facebook/react is:pr is:merged'
   );
 
   const delayedSetValue = debounce((val) => {
