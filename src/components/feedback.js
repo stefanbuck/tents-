@@ -12,10 +12,8 @@ export default function Feedback() {
 function Content() {
   const [formState, setFormState] = useState({
     submitted: false,
-    error: null,
     input: '',
     emoji: '',
-    loading: false,
   });
 
   function submitHandler(event) {
@@ -23,7 +21,6 @@ function Content() {
 
     setFormState({
       ...formState,
-      loading: true,
     });
 
     fetch('/api/feedback', {
@@ -34,30 +31,12 @@ function Content() {
       headers: {
         'Content-Type': 'application/json',
       },
-    })
-      .then((res) => {
-        if (res.status === 201) {
-          setFormState({
-            submitted: true,
-            error: null,
-            input: '',
-            loading: false,
-          });
-          return;
-        }
-        setFormState({
-          ...formState,
-          error: 'Oops, something went wrong. Please try again',
-          loading: false,
-        });
-      })
-      .catch(() => {
-        setFormState({
-          ...formState,
-          error: 'Oops, something went wrong. Please try again',
-          loading: false,
-        });
-      });
+    });
+
+    setFormState({
+      submitted: true,
+      input: '',
+    });
   }
 
   const emojiList = ['😣', '😕', '😀', '🤩'];
@@ -118,27 +97,14 @@ function Content() {
                 }
               />
             </label>
-            {!formState.loading && (
-              <button
-                type="submit"
-                className="px-2 py-1 mt-2 text-white bg-green-500 rounded-lg"
-              >
-                Send Feedback
-              </button>
-            )}
-            {formState.loading && (
-              <button
-                disabled
-                type="submit"
-                className="px-2 py-1 mt-2 text-white bg-green-500 rounded-lg"
-              >
-                Sending&hellip;
-              </button>
-            )}
+
+            <button
+              type="submit"
+              className="px-2 py-1 mt-2 text-white bg-green-500 rounded-lg"
+            >
+              Send Feedback
+            </button>
           </>
-        )}
-        {formState.error && (
-          <span className="pl-4 text-red-700">🛑 {formState.error}</span>
         )}
       </form>
     </div>
