@@ -16,7 +16,7 @@ export default function DefaultLayout({ children }) {
         <Nav />
       </header>
 
-      <div className="px-6">{children}</div>
+      <div className="max-w-screen-md px-6 m-auto">{children}</div>
     </div>
   );
 }
