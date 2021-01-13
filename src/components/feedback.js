@@ -76,7 +76,7 @@ function Content() {
               type="button"
               key={emoji}
               className={cn(
-                'px-3 py-1 mx-4 mb-3 text-2xl transform hover:scale-125 filter-grayscale hover:filter-none',
+                'px-3 py-1 mx-2 md:mx-4 mb-3 text-2xl transform hover:scale-125 filter-grayscale hover:filter-none',
                 {
                   'filter-none': emoji === formState.emoji,
                 }
@@ -91,7 +91,7 @@ function Content() {
               Comment <span className="text-sm text-gray-500">(optional)</span>
               <textarea
                 value={formState.input}
-                className="block w-full h-20 m-auto border sm:w-3/5"
+                className="block w-full h-20 p-1 m-auto border sm:w-3/5"
                 onChange={(event) =>
                   setFormState({ ...formState, input: event.target.value })
                 }
@@ -100,7 +100,7 @@ function Content() {
 
             <button
               type="submit"
-              className="px-2 py-1 mt-2 text-white bg-green-500 rounded-lg"
+              className="px-2 py-1 mt-4 text-white bg-green-500 rounded-lg"
             >
               Send Feedback
             </button>
