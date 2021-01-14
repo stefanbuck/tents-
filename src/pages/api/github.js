@@ -122,7 +122,9 @@ export default async function handler(req, res) {
     },
   });
 
-  const { data, headers } = await graphQLClient.rawRequest(queryBuilder(query));
+  const { data, headers } = await graphQLClient.rawRequest(
+    queryBuilder(query.replace(/"/g, '\\"'))
+  );
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');

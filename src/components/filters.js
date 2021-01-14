@@ -16,27 +16,58 @@ export default function Filters({ onChange }) {
     getFilterFromQuery() || 'repo:facebook/react is:pr is:merged'
   );
 
-  const delayedSetValue = debounce((val) => {
+  function setFilterString(val) {
     setFilter(val);
     onChange(val);
     router.push({ query: { q: encodeURIComponent(val) } }, undefined, {
       shallow: true,
     });
-  }, 400);
+  }
+
+  const delayedSetValue = debounce(setFilterString, 400);
 
   useEffect(() => {
     setFilter(getFilterFromQuery());
     onChange(filter);
   }, []);
 
+  const examples = [
+    'repo:facebook/react author:gaearon',
+    'repo:facebook/react label:"Type: Bug"',
+    'repo:facebook/react assignee:bvaughn updated:>2021-01-01 ',
+    'repo:facebook/react milestone:18.0.0 sort:comments-desc',
+  ];
+
   return (
-    <div className="flex justify-between p-2 my-6 rounded bg-blue-gray-200">
-      Filters
-      <input
-        onChange={(event) => delayedSetValue(event.target.value)}
-        className="w-full px-1 ml-2 bg-white"
-        defaultValue={filter}
-      />
+    <div className="p-2 my-6 rounded bg-blue-gray-200">
+      <div className="flex justify-between">
+        Filters
+        <input
+          onChange={(event) => delayedSetValue(event.target.value)}
+          className="w-full px-1 ml-2 bg-white"
+          defaultValue={filter}
+          value={filter}
+        />
+      </div>
+      <details className="text-sm">
+        <summary className="italic underline">Examples</summary>
+        <ul className="truncate list-disc list-inside">
+          {examples.map((example, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={index}>
+              <button
+                type="button"
+                className="py-1 cursor-pointer md:py-0.5 hover:text-gray-500"
+                onClick={() => {
+                  setFilterString(`${example}`);
+                }}
+              >
+                {example}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </details>
     </div>
   );
 }
