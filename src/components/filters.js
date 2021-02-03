@@ -24,7 +24,7 @@ export default function Filters({ onChange }) {
     });
   }
 
-  const delayedSetValue = debounce(setFilterString, 400);
+  const delayedSetValue = debounce(setFilterString, 100);
 
   useEffect(() => {
     setFilter(getFilterFromQuery());
