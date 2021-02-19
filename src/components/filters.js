@@ -12,7 +12,7 @@ export default function Filters({ onChange }) {
   }
 
   const [filter, setFilter] = useState(
-    getFilterFromQuery() || 'repo:facebook/react is:pr is:merged'
+    getFilterFromQuery() || 'repo:backstage/backstage is:pr is:merged'
   );
 
   function setFilterString(val) {
@@ -29,10 +29,10 @@ export default function Filters({ onChange }) {
   }, []);
 
   const examples = [
-    'repo:facebook/react author:gaearon',
-    'repo:facebook/react label:"Type: Bug"',
-    'repo:facebook/react assignee:bvaughn updated:>2021-01-01 ',
-    'repo:facebook/react milestone:18.0.0 sort:comments-desc',
+    'repo:backstage/backstage is:pr is:open',
+    'repo:backstage/backstage author:Rugvip',
+    'repo:backstage/backstage label:"help wanted"',
+    'repo:backstage/backstage assignee:freben updated:>2021-01-01',
   ];
 
   return (
