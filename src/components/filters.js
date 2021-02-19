@@ -1,4 +1,3 @@
-import debounce from 'lodash.debounce';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -7,7 +6,7 @@ export default function Filters({ onChange }) {
 
   function getFilterFromQuery() {
     if (!router.query.q) {
-      return undefined;
+      return '';
     }
     return decodeURIComponent(router.query.q);
   }
@@ -23,8 +22,6 @@ export default function Filters({ onChange }) {
       shallow: true,
     });
   }
-
-  const delayedSetValue = debounce(setFilterString, 100);
 
   useEffect(() => {
     setFilter(getFilterFromQuery());
@@ -43,9 +40,8 @@ export default function Filters({ onChange }) {
       <div className="flex justify-between">
         Filters
         <input
-          onChange={(event) => delayedSetValue(event.target.value)}
+          onChange={(event) => setFilterString(event.target.value)}
           className="w-full px-1 ml-2 bg-white"
-          defaultValue={filter}
           value={filter}
         />
       </div>
