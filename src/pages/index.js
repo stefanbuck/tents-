@@ -27,7 +27,7 @@ export default function IndexPage() {
               <Card
                 {...node} /* eslint-disable-line react/jsx-props-no-spreading */
               />
-              {index === 2 ? <Feedback /> : ''}
+              {index === 4 ? <Feedback /> : ''}
             </div>
           );
         }}
