@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import cn from 'classnames';
 import { format } from 'timeago.js';
 import MergedIcon from '@/components/icons/merge';
@@ -60,11 +61,40 @@ function DiffStats({ additions, deletions }) {
   );
 }
 
+function CardBody({ content }) {
+  return (
+    <div
+      className="pt-4 font-normal break-words markdown-body"
+      /* eslint-disable-next-line react/no-danger */
+      dangerouslySetInnerHTML={{
+        __html: content,
+      }}
+    />
+  );
+}
+
+function Expandable({ children, isOpen }) {
+  const [open, setOpen] = useState(isOpen);
+
+  if (!open) {
+    return (
+      <div className="pt-12 pb-6 text-lg leading-none text-center text-blue-600">
+        <button type="button" onClick={() => setOpen(true)}>
+          Show description
+        </button>
+      </div>
+    );
+  }
+
+  return children;
+}
+
 export default function Card(data) {
   const {
     __typename: type,
     additions,
     author,
+    author: { __typename: authorType },
     authorAssociation,
     bodyHTML,
     comments,
@@ -90,7 +120,7 @@ export default function Card(data) {
             alt=""
             src={`${author.avatarUrl}&s=80`}
           />
-        </a>
+        </a>{' '}
         <div className="flex flex-col pl-2">
           <div className="flex grid content-center justify-start grid-flow-col gap-1 mb-2">
             <a
@@ -119,13 +149,9 @@ export default function Card(data) {
           <h3 className="text-sm font-bold text-gray-900">{title}</h3>
         </a>
       </div>
-      <div
-        className="pt-4 font-normal break-words markdown-body"
-        /* eslint-disable-next-line react/no-danger */
-        dangerouslySetInnerHTML={{
-          __html: bodyHTML,
-        }}
-      />
+      <Expandable isOpen={authorType !== 'Bot'}>
+        <CardBody content={bodyHTML} />
+      </Expandable>
       <div className="grid justify-start grid-flow-col gap-4 pt-4">
         <State type={type} state={state} />
         <Comments totalCount={comments.totalCount} url={url} />
