@@ -61,7 +61,10 @@ export default function Filters({ onChange }) {
   }
 
   useEffect(() => {
-    setFilter(getFilterFromQuery());
+    const val = getFilterFromQuery();
+    if (val) {
+      setFilter(val);
+    }
     onChange(filter);
   }, []);
 
