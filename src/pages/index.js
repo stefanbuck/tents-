@@ -20,7 +20,11 @@ export default function IndexPage() {
       <List filter={filter}>
         {function ListChildren({ cursor, node, index, total }) {
           if (total === 0) {
-            return <div>No results matched your filter criteria.</div>;
+            return (
+              <div className="flex items-center justify-center h-32 text-gray-600">
+                No results matched your filter criteria.
+              </div>
+            );
           }
           return (
             <div key={cursor}>

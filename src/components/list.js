@@ -27,8 +27,20 @@ export default function List({ filter = '', children }) {
   );
 
   if (!isValidSlug(slug)) return null;
-  if (error) return 'error';
-  if (!data) return 'loading...';
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-32 text-gray-600">
+        {error}
+      </div>
+    );
+  }
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center h-32 text-gray-600">
+        loading&hellip;
+      </div>
+    );
+  }
   const combinedList = [...data.pullRequests, ...data.issues].sort(
     (a, b) => b.node.number - a.node.number
   );
