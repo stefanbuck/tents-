@@ -7,7 +7,7 @@ function isValidSlug(slug) {
   return SLUG_REGEXP.test(slug);
 }
 
-export default function List({ filter = '', children }) {
+export default function List({ filter = '', children, after }) {
   const debouncedSearch = useDebounce(filter, 400);
 
   const filterList = filter.split(' ');
@@ -15,7 +15,8 @@ export default function List({ filter = '', children }) {
     .filter((item) => item.startsWith('repo:'))
     .map((item) => item.replace('repo:', ''))[0];
 
-  const apiUrl = `/api/github?query=${debouncedSearch}`;
+  const afterQuery = after ? `&after=${after}` : '';
+  const apiUrl = `/api/github?query=${debouncedSearch}${afterQuery}`;
 
   const { data, error } = useSWR(
     isValidSlug(slug) && debouncedSearch ? apiUrl : null,
@@ -50,6 +51,12 @@ export default function List({ filter = '', children }) {
   }
 
   return combinedList.map(({ cursor, node }, index) =>
-    children({ cursor, node, index, total: combinedList.length })
+    children({
+      cursor,
+      node,
+      index,
+      total: combinedList.length,
+      pageInfo: data.pageInfo,
+    })
   );
 }

@@ -14,8 +14,14 @@ async function connectToDatabase(uri) {
   return cachedDb;
 }
 
-function queryPullRequest(query) {
-  return `search(type:ISSUE last:20 query:"${query}") {
+function queryPullRequest(query, after) {
+  const page = after ? `after:"${after}" ` : ' ';
+
+  return `search(type:ISSUE ${page}last:20 query:"${query}") {
+    pageInfo {
+      endCursor,
+      hasNextPage,
+    }
     edges {
       cursor
       node {
@@ -53,8 +59,13 @@ function queryPullRequest(query) {
   }`;
 }
 
-function queryIssues(query) {
-  return `search(type:ISSUE last:20 query:"${query}") {
+function queryIssues(query, after) {
+  const page = after ? `after:"${after}" ` : ' ';
+  return `search(type:ISSUE ${page}last:20 query:"${query}") {
+    pageInfo {
+      endCursor,
+      hasNextPage,
+    }
     edges {
       cursor
       node {
@@ -88,15 +99,15 @@ function queryIssues(query) {
   }`;
 }
 
-function queryBuilder(query) {
+function queryBuilder(query, after) {
   return gql`query { 
-    pullRequests: ${queryPullRequest(query)}
-    issues: ${queryIssues(query)}
+    pullRequests: ${queryPullRequest(query, after)}
+    issues: ${queryIssues(query, after)}
   }`;
 }
 
 export default async function handler(req, res) {
-  const { query } = req.query;
+  const { query, after } = req.query;
   const session = await getSession({ req });
 
   let accessToken;
@@ -123,7 +134,7 @@ export default async function handler(req, res) {
   });
 
   const { data, headers } = await graphQLClient.rawRequest(
-    queryBuilder(query.replace(/"/g, '\\"'))
+    queryBuilder(query.replace(/"/g, '\\"'), after)
   );
 
   res.statusCode = 200;
@@ -139,6 +150,8 @@ export default async function handler(req, res) {
 
   return res.end(
     JSON.stringify({
+      // Search endpoint returns the same pageInfo for issues and pullrequests
+      pageInfo: data.pullRequests.pageInfo,
       pullRequests: data.pullRequests.edges.filter((item) => !!item.node?.url),
       issues: data.issues.edges.filter((item) => !!item.node?.url),
     })
