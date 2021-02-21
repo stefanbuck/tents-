@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import cn from 'classnames';
 import { format } from 'timeago.js';
 import MergedIcon from '@/components/icons/merge';
@@ -62,14 +62,48 @@ function DiffStats({ additions, deletions }) {
 }
 
 function CardBody({ content }) {
+  const containerEl = useRef(null);
+  const [collapsed, setCollapsed] = useState(true);
+
+  useEffect(() => {
+    if (containerEl.current.scrollHeight > containerEl.current.clientHeight) {
+      setCollapsed(true);
+    } else {
+      setCollapsed(false);
+    }
+  });
+
   return (
     <div
-      className="pt-4 font-normal break-words markdown-body"
-      /* eslint-disable-next-line react/no-danger */
-      dangerouslySetInnerHTML={{
-        __html: content,
-      }}
-    />
+      className={cn('relative', {
+        collapsed: collapsed === true,
+      })}
+    >
+      <div
+        ref={containerEl}
+        className={cn(
+          'pt-4 overflow-hidden font-normal break-words markdown-body',
+          {
+            'max-h-collapsed': collapsed === true,
+          }
+        )}
+        /* eslint-disable-next-line react/no-danger */
+        dangerouslySetInnerHTML={{
+          __html: content,
+        }}
+      />
+      {collapsed === true && (
+        <div className="text-center">
+          <button
+            type="button"
+            className="px-4 py-1 text-blue-600 cursor-pointer"
+            onClick={() => setCollapsed(false)}
+          >
+            Show full description
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -76,3 +76,18 @@
 .filter-none {
   filter: none !important;
 }
+
+.max-h-collapsed {
+  max-height: 24rem/* 384px */;
+}
+
+.collapsed::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 24rem;
+  width: 100%;
+  box-shadow: white 0px -100px 50px -50px inset;
+  pointer-events: none;
+}
