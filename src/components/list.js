@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import useDebounce from '../utils/hooks/useDebounce';
 
-const SLUG_REGEXP = /^[a-z0-9-]+\/[a-z0-9-]+$/i;
+const SLUG_REGEXP = /^[a-z0-9-.]+\/[a-z0-9-.]+$/i;
 
 function isValidSlug(slug) {
   return SLUG_REGEXP.test(slug);
