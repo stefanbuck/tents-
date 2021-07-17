@@ -4,18 +4,15 @@ export default function LandingContent() {
   return (
     <div className="p-6 my-4 rounded bg-blue-gray-200">
       <div>
-        <h1 className="text-3xl font-semibold">
-          The Missing Timeline for GitHub
-        </h1>
+        <h1 className="text-3xl font-semibold">Rethink how we use GitHub</h1>
         <p className="pt-6">
-          Tentacle is just a casual way of consuming content from GitHub in a
-          twitter-like manner.
+          Tentacle is a prototype to explore the idea of consuming GitHub issues
+          and pull requests in a Twitter-like way.
         </p>
         <p className="pt-6">
-          GitHub notifications can be overwhelming, following a few projects can
-          flood your inbox with updates even with the Custom Notification
-          Controls that allows you to subscribe to specific events
-          GitHub&hellip;{' '}
+          If you want to follow the evolution of a project, want to see what
+          people are talking about, what is happening, and what is coming next,
+          Tentacle is for you.{' '}
           <Link href="/about">
             <span className="underline cursor-pointer">Read on</span>
           </Link>

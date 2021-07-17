@@ -16,7 +16,13 @@ export default function DefaultLayout({ children }) {
         <Nav />
       </header>
 
-      <div className="max-w-screen-md px-2 m-auto md:px-6">{children}</div>
+      <div className="max-w-screen-md px-2 m-auto md:px-6">
+        {children}
+        <div className="pt-6 pb-12 text-sm italic text-center">
+          tentacle.app is not affiliated with, sponsored by, or endorsed by
+          GitHub Inc.
+        </div>
+      </div>
     </div>
   );
 }
