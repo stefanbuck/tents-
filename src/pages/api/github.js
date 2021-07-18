@@ -1,18 +1,4 @@
 import { GraphQLClient, gql } from 'graphql-request';
-import { getSession } from 'next-auth/client';
-import { MongoClient, ObjectId } from 'mongodb';
-
-let cachedDb = null;
-
-async function connectToDatabase(uri) {
-  if (cachedDb) {
-    return cachedDb;
-  }
-
-  const db = await MongoClient.connect(uri, { useNewUrlParser: true });
-  cachedDb = db;
-  return cachedDb;
-}
 
 function queryPullRequest(query, after) {
   const page = after ? `after:"${after}" ` : ' ';
@@ -108,23 +94,8 @@ function queryBuilder(query, after) {
 
 export default async function handler(req, res) {
   const { query, after } = req.query;
-  const session = await getSession({ req });
 
-  let accessToken;
-
-  if (session) {
-    const client = await connectToDatabase(process.env.NEXTAUTH_DATABASE_URL);
-    const db = client.db(client.s.options.dbName);
-    const collection = db.collection('accounts');
-
-    const response = await collection.findOne({
-      userId: ObjectId(session.userId),
-    });
-
-    accessToken = response.accessToken;
-  } else {
-    accessToken = process.env.GITHUB_TOKEN;
-  }
+  const accessToken = process.env.GITHUB_TOKEN;
 
   const endpoint = 'https://api.github.com/graphql';
   const graphQLClient = new GraphQLClient(endpoint, {

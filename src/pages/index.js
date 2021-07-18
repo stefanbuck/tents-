@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useSession } from 'next-auth/client';
 import Layout from '@/layouts/default';
 import List from '@/components/list';
 import Filters from '@/components/filters';
@@ -10,17 +9,14 @@ import Feedback from '@/components/feedback';
 export default function IndexPage() {
   const [filter, setFilter] = useState('');
   const [after, setAfter] = useState(null);
-  const [session, loading] = useSession();
 
   function loadMore(pageInfo) {
     setAfter(pageInfo.endCursor);
   }
 
-  if (loading) return null;
-
   return (
     <Layout>
-      {!session && <Hero />}
+      <Hero />
       <Filters
         onChange={(value) => {
           // TODO combine both sets into one
