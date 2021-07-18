@@ -2,13 +2,7 @@ import Link from 'next/link';
 
 export default function LandingContent() {
   return (
-    <div
-      className="p-6 mb-4 bg-white border rounded border-blue-gray-200 bg-no-repeat bg-right-bottom"
-      style={{
-        backgroundImage: 'url(./tentacle.png)',
-        backgroundPosition: 'right 85%',
-      }}
-    >
+    <div className="p-6 mb-4 bg-white border rounded border-blue-gray-200 hero-background">
       <div>
         <h1 className="text-3xl font-semibold">Rethink how we use GitHub</h1>
         <p className="pt-6 text-gray-500">

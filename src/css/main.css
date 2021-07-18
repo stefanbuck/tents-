@@ -9,6 +9,14 @@
   @apply font-sans font-semibold;
 }
 
+@media (min-width: 520px) {
+.hero-background {
+  background-image: url('/tentacle.png');
+  background-position: right 85%;
+  background-repeat: no-repeat;
+}
+}
+
 .markdown-body {
   @apply text-sm text-gray-600;
 }
