@@ -22,8 +22,8 @@ export default function AboutPage() {
       </p>
       <Link href="/" passHrefpassHref>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a href="#" className="bg-black text-white py-1 px-2 mt-6 inline-block">
-          Back
+        <a href="#" className="mt-6 inline-block text-blue-600">
+          &larr; Back
         </a>
       </Link>
     </Layout>
