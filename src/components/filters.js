@@ -69,10 +69,10 @@ export default function Filters({ onChange }) {
   }, []);
 
   const examples = [
-    'repo:backstage/backstage is:pr is:open',
-    'repo:backstage/backstage author:Rugvip',
-    'repo:backstage/backstage label:"help wanted"',
-    'repo:backstage/backstage assignee:freben updated:>2021-01-01',
+    'is:pr is:open repo:backstage/backstage',
+    'author:Rugvip repo:backstage/backstage',
+    'label:"help wanted" repo:backstage/backstage',
+    'assignee:freben updated:>2021-01-01 repo:backstage/backstage',
   ];
 
   return (
