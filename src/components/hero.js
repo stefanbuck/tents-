@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function LandingContent() {
   return (
     <div
-      className="p-6 mb-4 mt-6 bg-white border rounded border-blue-gray-200 bg-no-repeat bg-right-bottom"
+      className="p-6 mb-4 bg-white border rounded border-blue-gray-200 bg-no-repeat bg-right-bottom"
       style={{
         backgroundImage: 'url(./tentacle.png)',
         backgroundPosition: 'right 85%',

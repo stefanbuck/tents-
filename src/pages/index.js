@@ -16,7 +16,6 @@ export default function IndexPage() {
 
   return (
     <Layout>
-      <Hero />
       <Filters
         onChange={(value) => {
           // TODO combine both sets into one
@@ -24,6 +23,7 @@ export default function IndexPage() {
           setFilter(value);
         }}
       />
+      <Hero />
       <List filter={filter} after={after}>
         {function ListChildren({ cursor, node, index, total, pageInfo }) {
           if (total === 0) {

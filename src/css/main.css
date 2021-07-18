@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.tips code {
+  @apply font-sans font-semibold;
+}
+
 .markdown-body {
   @apply text-sm text-gray-600;
 }

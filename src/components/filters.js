@@ -3,16 +3,16 @@ import { useRouter } from 'next/router';
 
 function Tips() {
   const tips = [
-    'Follow long discussions with `comments:>50`.',
-    '`no:milestone` will show everything without a milestone.',
-    'Find everything you created by `author:octocat`.',
-    'Adding `no:label` will show everything without a label.',
-    'Ears burning? Get @octocat mentions with `mentions:octocat`.',
-    'Exclude your own issues with `-author:octocat`.',
-    "Find all pull requests that aren't related to any open issues with `-linked:issue`.",
-    'Filter pull requests by the default branch with `base:main`.',
-    'Exclude everything labeled bug with `-label:bug`.',
-    'Add `no:assignee` to see everything that’s not assigned.',
+    'Follow long discussions with <code>`comments:>50`</code>',
+    '<code>`no:milestone`</code> will show everything without a milestone',
+    'Find everything you created by <code>`author:octocat`</code>',
+    'Adding <code>`no:label`</code> will show everything without a label',
+    'Ears burning? Get @octocat mentions with <code>`mentions:octocat`</code>',
+    'Exclude your own issues with <code>`-author:octocat`</code>',
+    "Find all pull requests that aren't related to any open issues with <code>`-linked:issue`</code>.",
+    'Filter pull requests by the default branch with <code>`base:main`</code>',
+    'Exclude everything labeled bug with <code>`-label:bug`</code>',
+    'Add <code>`no:assignee`</code> to see everything that’s not assigned',
   ];
 
   const [index, setIndex] = useState(0);
@@ -25,15 +25,22 @@ function Tips() {
   }
 
   return (
-    <div className="mt-1 mb-4 ml-1 text-xs text-gray-500">
-      <button
-        type="button"
-        className="text-blue-600"
-        onClick={() => showNext()}
-      >
-        Show another tip:
-      </button>{' '}
-      {tips[index]}
+    <div className="mt-4 mb-2 ml-1 text-sm text-gray-500 flex">
+      <div
+        className="flex-1 tips" /* eslint-disable-next-line react/no-danger */
+        dangerouslySetInnerHTML={{
+          __html: tips[index],
+        }}
+      />
+      <div className="">
+        <button
+          type="button"
+          className="text-blue-600 font-medium"
+          onClick={() => showNext()}
+        >
+          Show another tip
+        </button>
+      </div>
     </div>
   );
 }
@@ -76,17 +83,19 @@ export default function Filters({ onChange }) {
   ];
 
   return (
-    <div className="p-2 my-6 rounded bg-blue-gray-200">
+    <div className="p-2 my-4">
       <input
         onChange={(event) => setFilterString(event.target.value)}
-        className="w-full px-2 py-1 bg-white"
+        className="w-full p-3 bg-white border-blue-gray-200 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
         value={filter}
       />
 
       <Tips />
       <details className="text-sm">
-        <summary className="italic underline cursor-pointer">Examples</summary>
-        <ul className="truncate list-disc list-inside">
+        <summary className="cursor-pointer text-blue-600 font-semibold">
+          Examples
+        </summary>
+        <ul className="truncate list-disc list-inside ml-2">
           {examples.map((example, index) => (
             // eslint-disable-next-line react/no-array-index-key
             <li key={index}>
