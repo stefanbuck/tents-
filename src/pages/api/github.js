@@ -116,7 +116,7 @@ export default async function handler(req, res) {
   res.setHeader('x-ratelimit-used', headers.get('x-ratelimit-used'));
   res.setHeader(
     'Cache-Control',
-    'public, max-age=300, s-maxage=300, stale-while-revalidate'
+    'public, max-age=300, s-maxage=300, stale-while-revalidate=3600'
   );
 
   return res.end(
