@@ -56,7 +56,7 @@ export default function Filters({ onChange }) {
   }
 
   const [filter, setFilter] = useState(
-    getFilterFromQuery() || 'repo:backstage/backstage is:pr is:merged'
+    getFilterFromQuery() || 'label:hacktoberfest is:issue is:open'
   );
 
   function setFilterString(val) {
@@ -76,10 +76,10 @@ export default function Filters({ onChange }) {
   }, []);
 
   const examples = [
-    'is:pr is:open repo:backstage/backstage',
-    'author:Rugvip repo:backstage/backstage',
-    'label:"help wanted" repo:backstage/backstage',
-    'assignee:freben updated:>2021-01-01 repo:backstage/backstage',
+    'label:hacktoberfest is:issue org:microsoft',
+    'label:hacktoberfest is:pr author:your-user',
+    'label:hacktoberfest is:issue',
+    'label:hacktoberfest is:pr',
   ];
 
   return (
