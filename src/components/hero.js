@@ -9,7 +9,7 @@ export default function LandingContent() {
           Tentacle is a prototype to explore the idea of consuming GitHub issues
           and pull requests in a Twitter-like way.
         </p>
-        <p className="pt-6 pb-4 text-gray-500">
+        <div className="pt-6 pb-4 text-gray-500">
           <ul className="pl-6">
             <li className="list-disc">Follow the evolution of a project</li>
             <li className="list-disc">See what people are talking about </li>
@@ -17,7 +17,7 @@ export default function LandingContent() {
               Stay up to date with the latest changes
             </li>
           </ul>
-        </p>
+        </div>
         <Link href="/about">
           <span className="text-blue-600 font-medium cursor-pointer">
             See what else it can do!
